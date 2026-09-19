@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elhadji Malick Niang — CV</title>
+<style>
+  :root{
+    --navy: #22364d;
+    --navy-deep: #1a2a3d;
+    --blue: #3a86bd;
+    --blue-light: #6fb1de;
+    --blue-pale: #eaf3fa;
+    --ink: #26313d;
+    --paper: #ffffff;
+    --muted: #6d7a87;
+    --line: #dfe7ee;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--blue-pale);
+    line-height: 1.5;
+  }
+
+  .sheet{
+    max-width: 1100px;
+    margin: 24px auto;
+    background: var(--paper);
+    box-shadow: 0 8px 30px rgba(20,40,60,.12);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  /* ===== HEADER BANNER ===== */
+  .banner{
+    background: linear-gradient(120deg, var(--blue) 0%, #4a93c9 100%);
+    color: #fff;
+    padding: 30px 40px 26px;
+    position: relative;
+  }
+  .banner .role{
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  .banner .dates{
+    font-size: .95rem;
+    opacity: .92;
+    margin: 0 0 18px;
+  }
+  .banner .name-row{
+    display:flex;
+    align-items:center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .avatar{
+    width: 64px;height:64px;border-radius:50%;
+    background: var(--navy);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700; font-size:1.1rem;
+    border: 3px solid rgba(255,255,255,.55);
+    flex: none;
+  }
+  .banner .name{
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin:0;
+  }
+  .banner .school{
+    display:inline-block;
+    margin-top: 4px;
+    background: rgba(255,255,255,.18);
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: .85rem;
+  }
+
+  /* ===== LAYOUT ===== */
+  .layout{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar{
+    background: var(--navy);
+    color: #dfe8f0;
+    padding: 26px 22px 34px;
+  }
+  .sb-block{ margin-bottom: 26px; }
+  .sb-title{
+    color: var(--blue-light);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    margin: 0 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255,255,255,.18);
+  }
+  .sb-block ul{ list-style:none; margin:0; padding:0; }
+  .sb-block li{
+    font-size: .85rem;
+    padding: 3px 0;
+    color: #dfe8f0;
+  }
+  .contact-list li{ word-break: break-word; }
+
+  .sb-accordion-btn{
+    width:100%;
+    background:none;
+    border:none;
+    color:#fff;
+    text-align:left;
+    font-size:.85rem;
+    font-weight:600;
+    padding: 7px 0;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+  }
+  .sb-accordion-btn .chev{
+    transition: transform .25s ease;
+    font-size:.7rem;
+    color: var(--blue-light);
+  }
+  .sb-accordion-btn[aria-expanded="true"] .chev{ transform: rotate(90deg); }
+  .sb-accordion-panel{
+    max-height:0;
+    overflow:hidden;
+    transition: max-height .3s ease;
+  }
+  .sb-accordion-panel.open{ max-height: 260px; }
+  .sb-accordion-panel ul{ padding: 4px 0 10px 4px; }
+  .sb-accordion-panel li{ font-size:.8rem; color:#c9d6e2; padding:3px 0; }
+
+  .lang-row{ margin-bottom:8px; }
+  .lang-row .lname{ font-size:.83rem; display:flex; justify-content:space-between; margin-bottom:3px;}
+  .lang-row .lname span:last-child{ color: var(--blue-light); font-size:.72rem; }
+  .bar{ height:5px; background: rgba(255,255,255,.15); border-radius:3px; overflow:hidden; }
+  .bar > i{ display:block; height:100%; background: var(--blue-light); border-radius:3px; }
+
+  .rythme-box{
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: .82rem;
+    text-align:center;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .content{ padding: 26px 40px 40px; }
+
+  .tabs{
+    display:flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 22px;
+    overflow-x:auto;
+  }
+  .tab-btn{
+    background:none;
+    border:none;
+    padding: 10px 16px;
+    font-size: .92rem;
+    font-weight:600;
+    color: var(--muted);
+    cursor:pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+  }
+  .tab-btn:hover{ color: var(--blue); }
+  .tab-btn.active{ color: var(--navy); border-bottom-color: var(--blue); }
+
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; animation: fade .25s ease; }
+  @keyframes fade{ from{opacity:0; transform: translateY(4px);} to{opacity:1; transform:none;} }
+
+  .tab-panel h3{
+    color: var(--navy);
+    font-size: 1.05rem;
+    margin: 0 0 14px;
+  }
+
+  .profil-text{ font-size: .95rem; color: var(--ink); max-width: 70ch; }
+
+  /* Timeline (Formation / Experiences) */
+  .timeline{ list-style:none; margin:0; padding:0; }
+  .timeline li{
+    position:relative;
+    padding: 0 0 22px 26px;
+    border-left: 2px solid var(--line);
+  }
+  .timeline li:last-child{ border-color: transparent; padding-bottom:0; }
+  .timeline li::before{
+    content:"";
+    position:absolute; left:-6px; top:2px;
+    width:10px;height:10px;border-radius:50%;
+    background: var(--blue);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--blue);
+  }
+  .tl-date{ font-size:.78rem; color: var(--blue); font-weight:700; }
+  .tl-title{ font-size: .95rem; font-weight:700; color: var(--navy); margin: 2px 0 1px; }
+  .tl-sub{ font-size:.82rem; color: var(--muted); margin: 0 0 6px; }
+  .tl-list{ margin: 4px 0 0 18px; padding:0; font-size:.85rem; }
+  .tl-list li{ border:none; padding: 1px 0; }
+  .tl-list li::before{ display:none; }
+
+  /* Projets accordion */
+  .proj{
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    overflow:hidden;
+  }
+  .proj-btn{
+    width:100%;
+    background: var(--blue-pale);
+    border:none;
+    text-align:left;
+    padding: 12px 16px;
+    font-size:.92rem;
+    font-weight:700;
+    color: var(--navy);
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap: 10px;
+  }
+  .proj-btn .chev{ color: var(--blue); transition: transform .25s ease; font-size:.8rem; flex:none; }
+  .proj-btn[aria-expanded="true"] .chev{ transform: rotate(180deg); }
+  .proj-panel{
+    max-height:0;
+    overflow:hidden;
+    transition: max-height .3s ease;
+    background:#fff;
+  }
+  .proj-panel.open{ max-height: 200px; }
+  .proj-panel p{ margin:0; padding: 12px 16px; font-size:.87rem; color: var(--ink); }
+
+  footer.note{
+    text-align:center;
+    font-size:.72rem;
+    color: var(--muted);
+    padding: 14px 0 26px;
+  }
+
+  @media (max-width: 720px){
+    .layout{ grid-template-columns: 1fr; }
+    .content{ padding: 22px 20px 30px; }
+    .banner{ padding: 24px 20px 20px; }
+    .sidebar{ padding: 22px 20px 26px; }
+  }
+
+  @media print{
+    body{ background:#fff; }
+    .sheet{ box-shadow:none; margin:0; }
+    .tab-panel{ display:block !important; }
+    .tabs{ display:none; }
+    .proj-panel{ max-height:none !important; }
+    .sb-accordion-panel{ max-height:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- BANNER -->
+  <div class="banner">
+    <p class="role">Alternance Data analyst</p>
+    <p class="dates">septembre 2026 — juin 2028</p>
+    <div class="name-row">
+      <div class="avatar">EMN</div>
+      <div>
+        <p class="name">ELHADJI MALICK NIANG</p>
+        <span class="school">IUT Besançon-Vesoul</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sb-block">
+        <p class="sb-title">CONTACT</p>
+        <ul class="contact-list">
+          <li>06 05 91 53 97</li>
+          <li>niangelhadjimalick82@gmail.com</li>
+          <li>48 Av. Georges Pompidou</li>
+          <li>Dole (39100)</li>
+        </ul>
+      </div>
+
+      <div class="sb-block">
+        <p class="sb-title">COMPÉTENCES</p>
+
+        <button class="sb-accordion-btn" aria-expanded="true" data-acc="prog">
+          Programmation &amp; Données <span class="chev">▶</span>
+        </button>
+        <div class="sb-accordion-panel open" data-panel="prog">
+          <ul>
+            <li>Python (manipulation fichiers)</li>
+            <li>SQL (requêtes, jointures)</li>
+            <li>R / RStudio (analyses statistiques)</li>
+            <li>Power BI (visualisation de données)</li>
+            <li>Excel (tableur &amp; reporting)</li>
+            <li>Access (bases de données relationnelles)</li>
+          </ul>
+        </div>
+
+        <button class="sb-accordion-btn" aria-expanded="false" data-acc="stat">
+          Analyse statistique <span class="chev">▶</span>
+        </button>
+        <div class="sb-accordion-panel" data-panel="stat">
+          <ul>
+            <li>Nettoyage &amp; préparation des données</li>
+            <li>Analyse exploratoire (EDA)</li>
+            <li>Statistiques descriptives &amp; inférentielles</li>
+            <li>Visualisation avancée</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sb-block">
+        <p class="sb-title">LANGUES</p>
+        <div class="lang-row">
+          <div class="lname"><span>Français</span><span>courant</span></div>
+          <div class="bar"><i style="width:95%"></i></div>
+        </div>
+        <div class="lang-row">
+          <div class="lname"><span>Wolof</span><span>langue maternelle</span></div>
+          <div class="bar"><i style="width:100%"></i></div>
+        </div>
+        <div class="lang-row">
+          <div class="lname"><span>Anglais</span><span>débutant</span></div>
+          <div class="bar"><i style="width:35%"></i></div>
+        </div>
+      </div>
+
+      <div class="sb-block">
+        <p class="sb-title">RYTHME D'ALTERNANCE</p>
+        <div class="rythme-box">1 mois entreprise / 1 mois école</div>
+      </div>
+
+      <div class="sb-block">
+        <p class="sb-title">QUALITÉS</p>
+        <ul>
+          <li>Rigueur &amp; organisation</li>
+          <li>Curiosité intellectuelle</li>
+          <li>Travail en équipe</li>
+          <li>Adaptabilité</li>
+          <li>Sens de la communication</li>
+        </ul>
+      </div>
+
+      <div class="sb-block">
+        <p class="sb-title">CENTRES D'INTÉRÊT</p>
+        <ul>
+          <li>Boxe (à l'âge de 6 ans)</li>
+          <li>Voyages &amp; cultures</li>
+        </ul>
+      </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" data-tab="profil">Profil</button>
+        <button class="tab-btn" data-tab="formation">Formation</button>
+        <button class="tab-btn" data-tab="projets">Projets réalisés</button>
+        <button class="tab-btn" data-tab="experiences">Expériences</button>
+      </div>
+
+      <!-- PROFIL -->
+      <section class="tab-panel active" data-panel="profil">
+        <h3>Profil</h3>
+        <p class="profil-text">
+          Étudiant en 1ère année de BUT Science des Données, je suis a la recherche d'une
+          alternance à partir de septembre 2026 afin de mettre en pratique mes compétences en
+          analyse de données, en programmation et en statistiques, tout en développant une
+          expérience professionnelle concrète dans le domaine de la science des données. Cette
+          alternance constitue une étape essentielle pour confirmer les compétences acquises en
+          classe à travers une expérience en entreprise et pour valider mon cursus universitaire.
+        </p>
+      </section>
+
+      <!-- FORMATION -->
+      <section class="tab-panel" data-panel="formation">
+        <h3>Formation</h3>
+        <ul class="timeline">
+          <li>
+            <span class="tl-date">2025 – 2026</span>
+            <p class="tl-title">BUT Science des Données</p>
+            <p class="tl-sub">IUT Besançon-Vesoul — Université Marie et Louis Pasteur</p>
+            <ul class="tl-list">
+              <li>Statistiques descriptives et inférentielles</li>
+              <li>Programmation &amp; Bases de Données Relationnelles</li>
+              <li>Traitement, analyse et visualisation de données</li>
+            </ul>
+          </li>
+          <li>
+            <span class="tl-date">2024 – 2025</span>
+            <p class="tl-title">Licence Mathématiques-Physique-Informatique</p>
+            <p class="tl-sub">Université Gaston Berger (UGB), Saint-Louis, Sénégal</p>
+          </li>
+          <li>
+            <span class="tl-date">2023 – 2024</span>
+            <p class="tl-title">Baccalauréat Scientifique</p>
+            <p class="tl-sub">Lycée d'Excellence Seydina Limamou Laye – Dakar, Sénégal</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- PROJETS -->
+      <section class="tab-panel" data-panel="projets">
+        <h3>Projets réalisés</h3>
+
+        <div class="proj">
+          <button class="proj-btn" aria-expanded="false" data-proj="p1">
+            Analyse de capteurs PM2.5 <span class="chev">▾</span>
+          </button>
+          <div class="proj-panel" data-panelproj="p1">
+            <p>Détection de pannes, déviations et anomalies sur un réseau de capteurs de qualité de l'air via Python, et proposition de solutions correctives.</p>
+          </div>
+        </div>
+
+        <div class="proj">
+          <button class="proj-btn" aria-expanded="false" data-proj="p2">
+            Étude de marché pour Bloom, une marque de cosmétiques américaine <span class="chev">▾</span>
+          </button>
+          <div class="proj-panel" data-panelproj="p2">
+            <p>Identifier la région française la plus prometteuse pour qu'une entreprise américaine lance sa gamme cosmétique sur le marché français.</p>
+          </div>
+        </div>
+
+        <div class="proj">
+          <button class="proj-btn" aria-expanded="false" data-proj="p3">
+            Week-end Gourmand — Chat Perché <span class="chev">▾</span>
+          </button>
+          <div class="proj-panel" data-panelproj="p3">
+            <p>Projet mené en équipe : conception du questionnaire, collecte des données sur le terrain, nettoyage des données, puis analyse statistique des résultats afin d'en tirer des conclusions exploitables.</p>
+          </div>
+        </div>
+
+        <div class="proj">
+          <button class="proj-btn" aria-expanded="false" data-proj="p4">
+            Conception d'une base de données pour une entreprise du secteur de la mode <span class="chev">▾</span>
+          </button>
+          <div class="proj-panel" data-panelproj="p4">
+            <p>Concevoir et implanter une base de données relationnelle sous Access pour la gestion des stocks et des prix.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCES -->
+      <section class="tab-panel" data-panel="experiences">
+        <h3>Expériences professionnelles</h3>
+        <ul class="timeline">
+          <li>
+            <span class="tl-date">2025 – 2026</span>
+            <p class="tl-title">Soutien scolaire (4h / semaine)</p>
+            <p class="tl-sub">Particuliers — Dole</p>
+          </li>
+          <li>
+            <span class="tl-date">2025 – 2026</span>
+            <p class="tl-title">Restauration</p>
+            <p class="tl-sub">Équipier polyvalent – McDonald's, Dole</p>
+          </li>
+          <li>
+            <span class="tl-date">2023 – 2024</span>
+            <p class="tl-title">Soutien scolaire (4h / semaine)</p>
+            <p class="tl-sub">Academia / Association — Sénégal</p>
+          </li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="note">Cliquez sur les onglets et les titres de projet pour explorer le CV — imprimable en PDF via Ctrl/Cmd+P.</footer>
+</div>
+
+<script>
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector('.tab-panel[data-panel="'+btn.dataset.tab+'"]').classList.add('active');
+    });
+  });
+
+  // Sidebar accordion (compétences)
+  document.querySelectorAll('.sb-accordion-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      document.querySelector('.sb-accordion-panel[data-panel="'+btn.dataset.acc+'"]').classList.toggle('open', !open);
+    });
+  });
+
+  // Projets accordion
+  document.querySelectorAll('.proj-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      document.querySelector('.proj-panel[data-panelproj="'+btn.dataset.proj+'"]').classList.toggle('open', !open);
+    });
+  });
+</script>
+
+</body>
+</html>
